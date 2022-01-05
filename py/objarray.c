@@ -74,7 +74,8 @@ STATIC void array_print(const mp_print_t *print, mp_obj_t o_in, mp_print_kind_t 
     mp_obj_array_t *o = MP_OBJ_TO_PTR(o_in);
     if (o->typecode == BYTEARRAY_TYPECODE) {
         mp_print_str(print, "bytearray(b");
-        mp_str_print_quoted(print, o->items, o->len, true);
+        // Scottie hack!
+        mp_str_print_quoted(print, o->items, MIN(o->len,1000), true);
     } else {
         mp_printf(print, "array('%c'", o->typecode);
         if (o->len > 0) {
